@@ -1,0 +1,2 @@
+# FiveM-scoreboard
+scoreboard Fivem
