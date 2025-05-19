@@ -1,19 +1,30 @@
-local scoreboardData = {}
+local scoreboardVisible = false
+
+-- Ouvre le scoreboard quand TAB est pressé
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+        if IsControlPressed(0, 37) then -- 37 = TAB
+            if not scoreboardVisible then
+                scoreboardVisible = true
+                SetNuiFocus(true, false)
+                TriggerServerEvent('scoreboard:request')
+            end
+        else
+            if scoreboardVisible then
+                scoreboardVisible = false
+                SetNuiFocus(false, false)
+                SendNUIMessage({action = "close"})
+            end
+        end
+    end
+end)
 
 RegisterNetEvent('scoreboard:update')
 AddEventHandler('scoreboard:update', function(data)
-    scoreboardData = data
-    ShowScoreboard()
-end)
-
-function ShowScoreboard()
-    print("=== SCOREBOARD ===")
-    for identifier, stats in pairs(scoreboardData) do
-        local ratio = stats.kills / (stats.deaths == 0 and 1 or stats.deaths)
-        print(("ID: %s | Kills: %d | Morts: %d | Ratio: %.2f"):format(identifier, stats.kills, stats.deaths, ratio))
-    end
-end
-
-RegisterCommand("scoreboard", function()
-    TriggerServerEvent('scoreboard:request')
+    -- Envoie les données à la NUI
+    SendNUIMessage({
+        action = "open",
+        players = data
+    })
 end)
