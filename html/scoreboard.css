@@ -1,0 +1,61 @@
+body {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+#scoreboard {
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    background: rgba(30, 30, 30, 0.97);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    padding: 30px;
+    color: #fff;
+    z-index: 10;
+    transition: opacity 0.3s;
+}
+
+#scoreboard.hidden {
+    display: none;
+}
+
+#scoreboard h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #00eaff;
+}
+
+#scoreboard table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#scoreboard th, #scoreboard td {
+    padding: 12px 8px;
+    text-align: center;
+}
+
+#scoreboard th {
+    background: #222;
+    color: #00eaff;
+    font-size: 16px;
+}
+
+#scoreboard tr:nth-child(even) {
+    background: #262626;
+}
+
+#scoreboard tr:nth-child(odd) {
+    background: #23272b;
+}
+
+#scoreboard tr:hover {
+    background: #333;
+}
